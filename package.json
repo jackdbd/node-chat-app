@@ -3,6 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "author": "jackaljack <jackdebidda@gmail.com>",
+  "scripts": {
+    "start": "node server/server.js"
+  },
+  "engines": {
+    "node": "7.4.0"
+  },
   "license": "MIT",
   "devDependencies": {
     "eslint": "^3.19.0",

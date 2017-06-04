@@ -2,7 +2,7 @@ const path = require('path');
 const express = require('express');
 
 const publicPath = path.join(__dirname, '../public');
-// console.log(publicPath);
+const port = process.env.PORT || 3000;
 
 const app = express();
 // configure the express static middleware
@@ -14,6 +14,6 @@ app.get('/', (req, res) => {
   res.render('index.html');
 });
 
-app.listen(3000, () => {
-  console.log('Server is up at port 3000');
+app.listen(port, () => {
+  console.log(`Server is up at port ${port}`);
 });
