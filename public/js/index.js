@@ -13,3 +13,11 @@ socket.on('disconnect', () => {
 socket.on('newMessage', (message) => {
   console.log('You have got a new message:', message);
 });
+
+// add an acknowledgement on the client side
+socket.emit('createMessage', {
+  from: 'Frank',
+  text: 'Hi',
+}, (ackData) => {
+  console.log('Got it', ackData);
+});

@@ -21,9 +21,14 @@ io.on('connection', (socket) => {
   // fire an event to everybody except this user
   socket.broadcast.emit('newMessage', generateMessage('Admin', 'New user joined'));
 
-  socket.on('createMessage', (message) => {
+  // the callback is for the acknowledgement on the server side
+  socket.on('createMessage', (message, callback) => {
     console.log('createMessage', message);
     io.emit('newMessage', generateMessage(message.from, message.text));
+    /* with an acknowledgement the request listener (here the server is listening for 'connection'
+    events) can emit some data back to the event emitter (here the client emits 'createMessage'
+    events) every time it connects to the server. */
+    callback('This is the acknowledgement from the server');
   });
 
   socket.on('disconnect', () => {
