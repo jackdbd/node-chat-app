@@ -19,6 +19,18 @@ socket.on('newMessage', (message) => {
   $('#messages').append(li);
 });
 
+socket.on('newLocationMessage', (message) => {
+  /* eslint-disable no-undef */
+  const li = $('<li></li>');
+  const a = $('<a target="_blank">My current location</a>');
+  /* eslint-enable no-undef */
+  li.text(`${message.from}:`);
+  a.attr('href', message.url);
+  li.append(a);
+  // eslint-disable-next-line
+  $('#messages').append(li);
+});
+
 // add an acknowledgement on the client side
 socket.emit('createMessage', {
   from: 'Frank',
@@ -39,4 +51,22 @@ $('#message-form').on('submit', (event) => {
   }, (ackData) => {
     console.log('ack:', ackData);
   });
+});
+
+// eslint-disable-next-line
+const locationButton = $('#send-location');
+locationButton.on('click', () => {
+  if (!navigator.geolocation) {
+    return alert('Geolocation not supported by your browser.');
+  }
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      socket.emit('createLocationMessage', {
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+      });
+    },
+    () => {
+      alert('Unable to fetch location.');
+    });
 });
