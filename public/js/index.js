@@ -11,32 +11,26 @@ socket.on('disconnect', () => {
 
 // create a custom event handler
 socket.on('newMessage', (message) => {
-  console.log('message:', message);
+  // eslint-disable-next-line
+  const formattedTime = moment(message.createdAt).format('h:mm a');
   // eslint-disable-next-line
   const li = $('<li></li>');
-  li.text(`${message.from}: ${message.text}`);
+  li.text(`${message.from} ${formattedTime}: ${message.text}`);
   // eslint-disable-next-line
   $('#messages').append(li);
 });
 
 socket.on('newLocationMessage', (message) => {
   /* eslint-disable no-undef */
+  const formattedTime = moment(message.createdAt).format('h:mm a');
   const li = $('<li></li>');
   const a = $('<a target="_blank">My current location</a>');
   /* eslint-enable no-undef */
-  li.text(`${message.from}:`);
+  li.text(`${message.from} ${formattedTime}:`);
   a.attr('href', message.url);
   li.append(a);
   // eslint-disable-next-line
   $('#messages').append(li);
-});
-
-// add an acknowledgement on the client side
-socket.emit('createMessage', {
-  from: 'Frank',
-  text: 'Hi',
-}, (ackData) => {
-  console.log('ack:', ackData);
 });
 
 // eslint-disable-next-line
