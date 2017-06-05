@@ -43,12 +43,13 @@ socket.emit('createMessage', {
 $('#message-form').on('submit', (event) => {
   // prevent the default behavior of the form, which is refreshing the entire page
   event.preventDefault();
-  console.log('Form submitted');
+  // eslint-disable-next-line
+  const messageTextBox = $('[name=message]');
   socket.emit('createMessage', {
     from: 'User',
-    // eslint-disable-next-line
-    text: $('[name=message]').val(),
+    text: messageTextBox.val(),
   }, (ackData) => {
+    messageTextBox.val('');
     console.log('ack:', ackData);
   });
 });
@@ -59,14 +60,19 @@ locationButton.on('click', () => {
   if (!navigator.geolocation) {
     return alert('Geolocation not supported by your browser.');
   }
+
+  locationButton.attr('disabled', 'disabled').text('Send location...');
+
   navigator.geolocation.getCurrentPosition(
     (position) => {
+      locationButton.removeAttr('disabled').text('Send location');
       socket.emit('createLocationMessage', {
         latitude: position.coords.latitude,
         longitude: position.coords.longitude,
       });
     },
     () => {
+      locationButton.removeAttr('disabled').text('Send location');
       alert('Unable to fetch location.');
     });
 });
