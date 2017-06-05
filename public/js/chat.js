@@ -36,6 +36,16 @@ socket.on('disconnect', () => {
   console.log('Disconnected from server');
 });
 
+socket.on('updateUserList', (users) => {
+  const ol = $('<ol></ol>');
+  users.forEach((user) => {
+    const li = $('<li></li>');
+    li.text(user);
+    ol.append(li);
+  });
+  $('#users').html(ol);
+});
+
 socket.on('newMessage', (message) => {
   const template = $('#message-template').html();
   /* eslint-disable no-undef */
