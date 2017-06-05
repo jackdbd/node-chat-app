@@ -9,28 +9,30 @@ socket.on('disconnect', () => {
   console.log('Disconnected from server');
 });
 
-// create a custom event handler
 socket.on('newMessage', (message) => {
-  // eslint-disable-next-line
+  /* eslint-disable no-undef */
   const formattedTime = moment(message.createdAt).format('h:mm a');
-  // eslint-disable-next-line
-  const li = $('<li></li>');
-  li.text(`${message.from} ${formattedTime}: ${message.text}`);
-  // eslint-disable-next-line
-  $('#messages').append(li);
+  const template = $('#message-template').html();
+  const html = Mustache.render(template, {
+    createdAt: formattedTime,
+    from: message.from,
+    text: message.text,
+  });
+  $('#messages').append(html);
+  /* eslint-enable no-undef */
 });
 
 socket.on('newLocationMessage', (message) => {
   /* eslint-disable no-undef */
   const formattedTime = moment(message.createdAt).format('h:mm a');
-  const li = $('<li></li>');
-  const a = $('<a target="_blank">My current location</a>');
+  const template = $('#location-message-template').html();
+  const html = Mustache.render(template, {
+    createdAt: formattedTime,
+    from: message.from,
+    url: message.url,
+  });
+  $('#messages').append(html);
   /* eslint-enable no-undef */
-  li.text(`${message.from} ${formattedTime}:`);
-  a.attr('href', message.url);
-  li.append(a);
-  // eslint-disable-next-line
-  $('#messages').append(li);
 });
 
 // eslint-disable-next-line
