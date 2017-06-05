@@ -3,6 +3,7 @@ const http = require('http');
 const express = require('express');
 const socketIO = require('socket.io');
 const { generateMessage, generateLocationMessage } = require('./utils/message');
+const { isRealString } = require('./utils/validation');
 
 const publicPath = path.join(__dirname, '../public');
 const port = process.env.PORT || 3000;
@@ -20,6 +21,13 @@ io.on('connection', (socket) => {
   socket.emit('newMessage', generateMessage('Admin', 'Welcome to the Chat app'));
   // fire an event to everybody except this user
   socket.broadcast.emit('newMessage', generateMessage('Admin', 'New user joined'));
+
+  socket.on('join', (params, callback) => {
+    if (!isRealString(params.name) || !isRealString(params.room)) {
+      callback('Name and room name are required');
+    }
+    callback();
+  });
 
   // the callback is for the acknowledgement on the server side
   socket.on('createMessage', (message, callback) => {
