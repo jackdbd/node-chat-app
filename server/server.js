@@ -16,6 +16,17 @@ app.use(express.static(publicPath));
 io.on('connection', (socket) => {
   console.log('New user connected');
 
+  // create a custom event, emitted from the server to the client
+  socket.emit('newMessage', {
+    from: 'mike@example.com',
+    text: 'Hey, what is going on?',
+    createdAt: 12345,
+  });
+
+  socket.on('createMessage', (newMessage) => {
+    console.log('createMessage', newMessage);
+  });
+
   socket.on('disconnect', () => {
     console.log('User was disconnected');
   });
@@ -23,7 +34,6 @@ io.on('connection', (socket) => {
 
 // setup a route for the home page
 app.get('/', (req, res) => {
-//   res.send('<h1>Hello Express!</h1>');
   res.render('index.html');
 });
 
