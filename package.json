@@ -9,7 +9,7 @@
     "test-watch": "nodemon --exec 'yarn test'"
   },
   "engines": {
-    "node": "7.4.0"
+    "node": "8.1.4"
   },
   "license": "MIT",
   "devDependencies": {
