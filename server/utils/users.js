@@ -6,7 +6,7 @@ class Users {
     const user = {
       id,
       name,
-      room,
+      room
     };
     this.users.push(user);
     return user;
@@ -30,5 +30,5 @@ class Users {
 }
 
 module.exports = {
-  Users,
+  Users
 };
