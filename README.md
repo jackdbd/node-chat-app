@@ -3,4 +3,4 @@
 
 A Node.js chat app that uses Socket.io.
 
-See the Udemy course "The complete Node.js developer course (2nd edition)" by Andrew Mead.
+See the Udemy course "The complete Node.js developer course (2nd edition)" by [Andrew Mead](https://www.udemy.com/user/andrewmead/).
