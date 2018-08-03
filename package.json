@@ -13,15 +13,12 @@
     "ci": "npm-run-all --sequential test coverage"
   },
   "dependencies": {
-    "express": "^4.15.3",
-    "moment": "^2.18.1",
-    "socket.io": "^2.0.2"
+    "express": "4.15.3",
+    "moment": "2.18.1",
+    "socket.io": "2.0.2"
   },
   "devDependencies": {
     "codecov": "3.0.2",
-    "eslint": "3.19.0",
-    "eslint-config-airbnb-base": "11.2.0",
-    "eslint-plugin-import": "2.3.0",
     "expect": "1.20.2",
     "mocha": "3.4.2",
     "nodemon": "1.11.0",
