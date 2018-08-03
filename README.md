@@ -1,5 +1,5 @@
 # Node Chat App
-[![Build Status](https://travis-ci.org/jackdbd/node-chat-app.svg?branch=master)](https://travis-ci.org/jackdbd/node-chat-app) [![Greenkeeper badge](https://badges.greenkeeper.io/jackdbd/node-chat-app.svg)](https://greenkeeper.io/) [![codecov](https://codecov.io/gh/jackdbd/node-chat-app/branch/master/graph/badge.svg)](https://codecov.io/gh/jackdbd/node-chat-app)
+[![Build Status](https://travis-ci.org/jackdbd/node-chat-app.svg?branch=master)](https://travis-ci.org/jackdbd/node-chat-app) [![Renovate enabled](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovateapp.com/) [![codecov](https://codecov.io/gh/jackdbd/node-chat-app/branch/master/graph/badge.svg)](https://codecov.io/gh/jackdbd/node-chat-app)
 
 A Node.js chat app that uses Socket.io.
 
